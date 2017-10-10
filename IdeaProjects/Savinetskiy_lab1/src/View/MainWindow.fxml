@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InitializeListeners">
+   <children>
+      <ImageView fx:id="imageView" cacheHint="SCALE_AND_ROTATE" fitHeight="400.0" fitWidth="600.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <MenuBar fx:id="menuBar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu fx:id="file" mnemonicParsing="false" text="Файл">
+            <items>
+              <MenuItem id="open" fx:id="open" mnemonicParsing="false" text="Открыть" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Прокачать в ч/б">
+            <items>
+              <MenuItem fx:id="fast" mnemonicParsing="false" text="Быстрый" />
+                  <MenuItem fx:id="correctionForTheHumanEye" mnemonicParsing="false" text="Коррекция под человеческий глаз" />
+                  <MenuItem fx:id="desaturation" mnemonicParsing="false" text="Десатурация" />
+                  <MenuItem fx:id="gradationByMinimum" mnemonicParsing="false" text="Градация по минимуму" />
+                  <MenuItem fx:id="gradationByMaximum" mnemonicParsing="false" text="Градация по максимуму" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Ещё!">
+               <items>
+                  <MenuItem fx:id="histogramEqualization" mnemonicParsing="false" text="Эквализация гистограмы" />
+                <MenuItem fx:id="histogram" mnemonicParsing="false" text="Гистограмка" />
+                  <MenuItem fx:id="original" mnemonicParsing="false" text="Оригинал" />
+                  <Menu mnemonicParsing="false" text="Примеры изображений">
+                    <items>
+                      <MenuItem fx:id="sample1" mnemonicParsing="false" text="Bird" />
+                        <MenuItem fx:id="sample2" mnemonicParsing="false" text="Comic con" />
+                        <MenuItem fx:id="sample3" mnemonicParsing="false" text="Creepy" />
+                        <MenuItem fx:id="sample4" mnemonicParsing="false" text="Einstein" />
+                        <MenuItem fx:id="sample5" mnemonicParsing="false" text="Lenna" />
+                    </items>
+                  </Menu>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Настройки">
+               <items>
+                  <CheckMenuItem fx:id="newWindow" mnemonicParsing="false" text="Открывать в новом окне" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
