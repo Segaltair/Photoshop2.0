@@ -3,7 +3,9 @@ package Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -18,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Arrays;
@@ -73,10 +76,11 @@ public class InitializeListeners implements Initializable {
     @FXML
     private MenuItem sample6;
     @FXML
+    private MenuItem coding;
+    @FXML
     private CheckMenuItem newWindow;
 
     private Image originalImage;
-    //private Image originalImage = (new Image(Class.class.getResourceAsStream("/Lenna.jpg")));
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -217,6 +221,7 @@ public class InitializeListeners implements Initializable {
 
         histogram.setOnAction(event -> openHistogram(histogram.getText(), imageView.getImage()));
 
+        coding.setOnAction(event -> openCoding(coding.getText()));
 
         sample1.setOnAction(event -> openSample(sample1));
         sample2.setOnAction(event -> openSample(sample2));
@@ -278,6 +283,23 @@ public class InitializeListeners implements Initializable {
         stage.show();
     }
 
+    private void openCoding(String title) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("../View/Coding.fxml"));
+            stage.setTitle("Кодирование/Декодирование");
+            stage.setMinHeight(360);
+            stage.setMinWidth(720);
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void openHistogram(String title, Image image) {
         Stage stage = new Stage();
         stage.setMinHeight(400);
@@ -314,11 +336,8 @@ public class InitializeListeners implements Initializable {
         imageView.setImage(new Image(is));
         originalImage = imageView.getImage();
     }
-
-
 }
-class WrappedImageView extends ImageView
-{
+class WrappedImageView extends ImageView {
     WrappedImageView()
     {
         setPreserveRatio(false);
