@@ -28,31 +28,36 @@
                 <Menu mnemonicParsing="false" text="Ещё!">
                     <items>
                         <MenuItem fx:id="histogramEqualization" mnemonicParsing="false" text="Эквализация гистограмы" />
-                        <Menu mnemonicParsing="false" text="Матричный фильтр">
-                            <items>
-                                <MenuItem fx:id="matrixFilter" mnemonicParsing="false" text="Свой вариант" />
-                                <MenuItem fx:id="matrixFilter1" mnemonicParsing="false" />
-                                <MenuItem fx:id="matrixFilter2" mnemonicParsing="false" />
-                                <MenuItem fx:id="matrixFilter3" mnemonicParsing="false" />
-                                <MenuItem fx:id="matrixFilter4" mnemonicParsing="false" />
-                                <MenuItem fx:id="matrixFilter5" mnemonicParsing="false" />
-                                <MenuItem fx:id="matrixFilter6" mnemonicParsing="false" />
-                            </items>
-                        </Menu>
                         <MenuItem fx:id="histogram" mnemonicParsing="false" text="Гистограмка" />
-                        <MenuItem fx:id="original" mnemonicParsing="false" text="Оригинал" />
-                        <Menu mnemonicParsing="false" text="Примеры изображений">
-                            <items>
-                                <MenuItem fx:id="sample1" mnemonicParsing="false" text="Bird" />
-                                <MenuItem fx:id="sample2" mnemonicParsing="false" text="Comic con" />
-                                <MenuItem fx:id="sample3" mnemonicParsing="false" text="Creepy" />
-                                <MenuItem fx:id="sample4" mnemonicParsing="false" text="Einstein" />
-                                <MenuItem fx:id="sample5" mnemonicParsing="false" text="Lenna" />
-                                <MenuItem fx:id="sample6" mnemonicParsing="false" text="Zebra" />
-                            </items>
-                        </Menu>
+                        <MenuItem fx:id="original" mnemonicParsing="false" text="Вернуть оригинал" />
                     </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Матричная магия!">
+                      <items>
+                          <MenuItem fx:id="matrixFilter" mnemonicParsing="false" text="Свой вариант" />
+                          <MenuItem fx:id="matrixFilter1" mnemonicParsing="false" />
+                          <MenuItem fx:id="matrixFilter2" mnemonicParsing="false" />
+                          <MenuItem fx:id="matrixFilter3" mnemonicParsing="false" />
+                          <MenuItem fx:id="matrixFilter4" mnemonicParsing="false" />
+                          <MenuItem fx:id="matrixFilter5" mnemonicParsing="false" />
+                          <MenuItem fx:id="matrixFilter6" mnemonicParsing="false" />
+                      </items>
+                  </Menu>
+            <Menu mnemonicParsing="false" text="Закодировать!">
+              <items>
+                <MenuItem fx:id="coding" mnemonicParsing="false" text="Кодирование" />
+              </items>
+            </Menu>
+                  <Menu mnemonicParsing="false" text="Картинки!">
+                      <items>
+                          <MenuItem fx:id="sample1" mnemonicParsing="false" text="Bird" />
+                          <MenuItem fx:id="sample2" mnemonicParsing="false" text="Comic con" />
+                          <MenuItem fx:id="sample3" mnemonicParsing="false" text="Creepy" />
+                          <MenuItem fx:id="sample4" mnemonicParsing="false" text="Einstein" />
+                          <MenuItem fx:id="sample5" mnemonicParsing="false" text="Lenna" />
+                          <MenuItem fx:id="sample6" mnemonicParsing="false" text="Zebra" />
+                      </items>
+                  </Menu>
                 <Menu mnemonicParsing="false" text="Настройки">
                     <items>
                         <CheckMenuItem fx:id="newWindow" mnemonicParsing="false" text="Открывать в новом окне" />

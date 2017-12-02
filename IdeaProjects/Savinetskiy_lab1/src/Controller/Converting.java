@@ -11,7 +11,7 @@ public class Converting {
     private static int blue;
     private static int gray;
 
-    static Image fast(Image imageView){
+    public static Image fast(Image imageView){
         BufferedImage image = SwingFXUtils.fromFXImage(imageView, null);
 
         for(int i=0; i<image.getHeight(); i++) {
@@ -27,7 +27,7 @@ public class Converting {
         return SwingFXUtils.toFXImage(image, null);
     }
 
-    static Image correctionForTheHumanEye(Image imageView){
+    public static Image correctionForTheHumanEye(Image imageView){
         BufferedImage image = SwingFXUtils.fromFXImage(imageView, null);
 
         for(int i=0; i<image.getHeight(); i++) {
@@ -43,7 +43,7 @@ public class Converting {
         return SwingFXUtils.toFXImage(image, null);
     }
 
-    static Image desaturation(Image imageView){
+    public static Image desaturation(Image imageView){
         BufferedImage image = SwingFXUtils.fromFXImage(imageView, null);
 
         for(int i=0; i<image.getHeight(); i++) {
@@ -59,7 +59,7 @@ public class Converting {
         return SwingFXUtils.toFXImage(image, null);
     }
 
-    static Image gradationByMinimum(Image imageView){
+    public static Image gradationByMinimum(Image imageView){
         BufferedImage image = SwingFXUtils.fromFXImage(imageView, null);
 
         for(int i=0; i<image.getHeight(); i++) {
@@ -75,7 +75,7 @@ public class Converting {
         return SwingFXUtils.toFXImage(image, null);
     }
 
-    static Image gradationByMaximum(Image imageView){
+    public static Image gradationByMaximum(Image imageView){
         BufferedImage image = SwingFXUtils.fromFXImage(imageView, null);
 
         for(int i=0; i<image.getHeight(); i++) {
@@ -91,7 +91,7 @@ public class Converting {
         return SwingFXUtils.toFXImage(image, null);
     }
 
-    static Image matrixFilter(Image imageView, int[][] matrix, int divider){
+    public static Image matrixFilter(Image imageView, int[][] matrix, int divider){
         BufferedImage originalImage = SwingFXUtils.fromFXImage(imageView, null);
         BufferedImage image = SwingFXUtils.fromFXImage(imageView, null);
 
@@ -120,7 +120,7 @@ public class Converting {
         return SwingFXUtils.toFXImage(image, null);
     }
 
-    static int[] histogram(Image imageView){
+    public static int[] histogram(Image imageView){
         BufferedImage image = SwingFXUtils.fromFXImage(imageView, null);
         int[] hist = new int[256];
         if (isGray(image))
@@ -133,7 +133,7 @@ public class Converting {
         return hist;
     }
 
-    static Image histogramEqualization(Image imageView){
+    public static Image histogramEqualization(Image imageView){
         int[] hist = histogram(imageView);
         int maxGray = -1;
         int minGray = 255;
@@ -154,7 +154,7 @@ public class Converting {
         return SwingFXUtils.toFXImage(image, null);
     }
 
-    static boolean isGray(BufferedImage image){
+    public static boolean isGray(BufferedImage image){
         for(int i=0; i<image.getHeight(); i++) {
             for(int j=0; j<image.getWidth(); j++) {
                 Color c = new Color(image.getRGB(j,i));
