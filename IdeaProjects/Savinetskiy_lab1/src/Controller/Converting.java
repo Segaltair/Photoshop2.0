@@ -6,10 +6,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Converting {
-    static int red;
-    static int green;
-    static int blue;
-    static int gray;
+    private static int red;
+    private static int green;
+    private static int blue;
+    private static int gray;
 
     static Image fast(Image imageView){
         BufferedImage image = SwingFXUtils.fromFXImage(imageView, null);
@@ -88,6 +88,35 @@ public class Converting {
                 image.setRGB(j, i, new Color(gray, gray, gray).getRGB());
             }
         }
+        return SwingFXUtils.toFXImage(image, null);
+    }
+
+    static Image matrixFilter(Image imageView, int[][] matrix, int divider){
+        BufferedImage originalImage = SwingFXUtils.fromFXImage(imageView, null);
+        BufferedImage image = SwingFXUtils.fromFXImage(imageView, null);
+
+        if (isGray(originalImage))
+            for(int i=0; i<originalImage.getHeight(); i++) {
+                for(int j=0; j<originalImage.getWidth(); j++) {
+                    double anotherGray = 0;
+                    for (int k = 0; k < matrix.length; k++) {
+                        for (int l = 0; l < matrix[k].length; l++) {
+                            if (((i+k-matrix.length/2 < 0))||(j+l-matrix[k].length/2 < 0)||(i+k-matrix.length/2 >= originalImage.getHeight())||(j+l-matrix[k].length/2 >= originalImage.getWidth()))
+                                continue;
+                            Color c = new Color(originalImage.getRGB(j+l-matrix[k].length/2, i+k-matrix.length/2));
+                            anotherGray += matrix[k][l]*c.getRed();
+                        }
+
+                    }
+                    anotherGray = anotherGray / divider;
+
+                    if (anotherGray > 255) anotherGray = 255;
+                    if (anotherGray < 0) anotherGray = 0;
+
+
+                    image.setRGB(j, i, new Color((int) anotherGray,(int) anotherGray,(int) anotherGray).getRGB());
+                }
+            }
         return SwingFXUtils.toFXImage(image, null);
     }
 

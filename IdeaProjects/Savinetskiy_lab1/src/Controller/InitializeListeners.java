@@ -9,9 +9,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +18,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class InitializeListeners implements Initializable {
@@ -39,6 +41,20 @@ public class InitializeListeners implements Initializable {
     @FXML
     private MenuItem gradationByMaximum;
     @FXML
+    private MenuItem matrixFilter;
+    @FXML
+    private MenuItem matrixFilter1;
+    @FXML
+    private MenuItem matrixFilter2;
+    @FXML
+    private MenuItem matrixFilter3;
+    @FXML
+    private MenuItem matrixFilter4;
+    @FXML
+    private MenuItem matrixFilter5;
+    @FXML
+    private MenuItem matrixFilter6;
+    @FXML
     private MenuItem histogramEqualization;
     @FXML
     private MenuItem histogram;
@@ -55,6 +71,8 @@ public class InitializeListeners implements Initializable {
     @FXML
     private MenuItem sample5;
     @FXML
+    private MenuItem sample6;
+    @FXML
     private CheckMenuItem newWindow;
 
     private Image originalImage;
@@ -62,134 +80,179 @@ public class InitializeListeners implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        imageView.setImage(originalImage);
+        int[][] matrix1 = new int[][] {
+                {0, 0,0},
+                {0, 0, 1},
+                {0, 0, 0}
+        };
+        int[][] matrix2 = new int[][] {
+                {1, 1, 1},
+                {1, 1, 1},
+                {1, 1, 1}
+        };
+        int[][] matrix3 = new int[][] {
+                {0, 1, 0},
+                {1, -4, 1},
+                {0, 1, 0}
+        };
 
-        open.setOnAction(new javafx.event.EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                FileChooser fileChooser = new FileChooser();
-                File file = fileChooser.showOpenDialog(imageView.getScene().getWindow());
-                try{
-                    originalImage = new Image(file.toURI().toString());
-                    imageView.setImage(originalImage);}
-                    catch (NullPointerException e){ }
-            }
-        });
+        int[][] matrix4 = new int[][] {
+                {1, 0, 0}
+        };
 
-        fast.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(newWindow.isSelected()) openImageInNewWindow(fast.getText(), Converting.fast(imageView.getImage()));
-                else imageView.setImage(Converting.fast(imageView.getImage()));
-            }
-        });
+        int[][] matrix5 = new int[][] {
+                {-1, 0, 1},
+                {-2, 0, 2},
+                {-1, 0, 1}
+        };
 
-        correctionForTheHumanEye.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(newWindow.isSelected())
-                    openImageInNewWindow(correctionForTheHumanEye.getText(), Converting.correctionForTheHumanEye(imageView.getImage()));
-                else
-                    imageView.setImage(Converting.correctionForTheHumanEye(imageView.getImage()));
-            }
-        });
+        int[][] matrix6 = new int[][] {
+                {-1, -2, -1},
+                {0, 0, 0},
+                {1, 2, 1}
+        };
 
-        desaturation.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(newWindow.isSelected())
-                    openImageInNewWindow(desaturation.getText(), Converting.desaturation(imageView.getImage()));
-                else
-                    imageView.setImage(Converting.desaturation(imageView.getImage()));
-            }
-        });
-
-        gradationByMinimum.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(newWindow.isSelected())
-                    openImageInNewWindow(gradationByMinimum.getText(), Converting.gradationByMinimum(imageView.getImage()));
-                else
-                    imageView.setImage(Converting.gradationByMinimum(imageView.getImage()));
-            }
+        open.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            File file = fileChooser.showOpenDialog(imageView.getScene().getWindow());
+            try{
+                originalImage = new Image(file.toURI().toString());
+                imageView.setImage(originalImage);}
+            catch (NullPointerException e){ }
         });
 
-        gradationByMaximum.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(newWindow.isSelected())
-                    openImageInNewWindow(gradationByMaximum.getText(), Converting.gradationByMaximum(imageView.getImage()));
-                else
-                    imageView.setImage(Converting.gradationByMaximum(imageView.getImage()));
+        fast.setOnAction(event -> {
+            if(newWindow.isSelected()) openImageInNewWindow(fast.getText(), Converting.fast(imageView.getImage()));
+            else imageView.setImage(Converting.fast(imageView.getImage()));
+        });
+
+        correctionForTheHumanEye.setOnAction(event -> {
+            if(newWindow.isSelected())
+                openImageInNewWindow(correctionForTheHumanEye.getText(), Converting.correctionForTheHumanEye(imageView.getImage()));
+            else
+                imageView.setImage(Converting.correctionForTheHumanEye(imageView.getImage()));
+        });
+
+        desaturation.setOnAction(event -> {
+            if(newWindow.isSelected())
+                openImageInNewWindow(desaturation.getText(), Converting.desaturation(imageView.getImage()));
+            else
+                imageView.setImage(Converting.desaturation(imageView.getImage()));
+        });
+
+        gradationByMinimum.setOnAction(event -> {
+            if(newWindow.isSelected())
+                openImageInNewWindow(gradationByMinimum.getText(), Converting.gradationByMinimum(imageView.getImage()));
+            else
+                imageView.setImage(Converting.gradationByMinimum(imageView.getImage()));
+        });
+
+        gradationByMaximum.setOnAction(event -> {
+            if(newWindow.isSelected())
+                openImageInNewWindow(gradationByMaximum.getText(), Converting.gradationByMaximum(imageView.getImage()));
+            else
+                imageView.setImage(Converting.gradationByMaximum(imageView.getImage()));
+        });
+
+        matrixFilter.setOnAction(event -> {
+            TextInputDialog setSize = new TextInputDialog();
+            setSize.setTitle("Размерность матрицы");
+            setSize.setHeaderText("Введите размеры матрицы. Например \"3 3\"");
+            Optional<String> resultString = setSize.showAndWait();
+
+            int divider = 1;
+            String size;
+            if (resultString.isPresent()) {
+                size = resultString.get();
+                if (!Objects.equals(size, "")){
+                    int i = Integer.parseInt(size.split(" ")[0]);
+                    int j = Integer.parseInt(size.split(" ")[1]);
+                    int[][] matrix = new int[i][j];
+                    System.out.println(i + " " + j);
+
+                    TextInputDialog setElements = new TextInputDialog();
+                    setElements.setTitle("Элементы матрицы");
+                    setElements.setHeaderText("Введите элементы матрицы (" + (i*j) + " элемента(ов)). Например \"1 2 3 4 5...\"");
+                    Optional<String> elements = setElements.showAndWait();
+                    size = elements.get();
+                    int n = 0;
+                    if (!size.equals("")){
+                        for (int k = 0; k < i; k++) {
+                            for (int l = 0; l < j; l++) {
+                                int element = Integer.parseInt(size.split(" ")[n]);
+                                matrix[k][l] = element;
+                                n++;
+                            }
+                        }
+                        TextInputDialog setDivider = new TextInputDialog();
+                        setDivider.setTitle("Делитель");
+                        setDivider.setHeaderText("1/x*matrix. Введите x");
+                        Optional<String> stringDivider = setDivider.showAndWait();
+                        divider = Integer.parseInt(stringDivider.get());
+
+                        if(newWindow.isSelected())
+                            openImageInNewWindow(matrixFilter.getText(), Converting.matrixFilter(imageView.getImage(), matrix, divider));
+                        else
+                            imageView.setImage(Converting.matrixFilter(imageView.getImage(), matrix, divider));
+                    }
+                }
             }
         });
 
-        histogramEqualization.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(newWindow.isSelected())
-                    openImageInNewWindow(histogramEqualization.getText(), Converting.histogramEqualization(imageView.getImage()));
-                else
-                    imageView.setImage(Converting.histogramEqualization(imageView.getImage()));
-            }
+        createMatrixFilter(matrixFilter1, matrix1, 1);
+        createMatrixFilter(matrixFilter2, matrix2, 9);
+        createMatrixFilter(matrixFilter3, matrix3, 1);
+        createMatrixFilter(matrixFilter4, matrix4, 1);
+        createMatrixFilter(matrixFilter5, matrix5, 1);
+        createMatrixFilter(matrixFilter6, matrix6, 1);
+
+        histogramEqualization.setOnAction(event -> {
+            if(newWindow.isSelected())
+                openImageInNewWindow(histogramEqualization.getText(), Converting.histogramEqualization(imageView.getImage()));
+            else
+                imageView.setImage(Converting.histogramEqualization(imageView.getImage()));
         });
 
-        original.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                imageView.setImage(originalImage);
-            }
-        });
+        original.setOnAction(event -> imageView.setImage(originalImage));
 
-        histogram.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                openHistogram(histogram.getText(), imageView.getImage());
-            }
-        });
+        histogram.setOnAction(event -> openHistogram(histogram.getText(), imageView.getImage()));
 
-        sample1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                openSample(sample1);
-            }
-        });
-        sample2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                openSample(sample2);
-            }
-        });
-        sample3.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                openSample(sample3);
-            }
-        });
-        sample4.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                openSample(sample4);
-            }
-        });
-        sample5.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                openSample(sample5);
-            }
+
+        sample1.setOnAction(event -> openSample(sample1));
+        sample2.setOnAction(event -> openSample(sample2));
+        sample3.setOnAction(event -> openSample(sample3));
+        sample4.setOnAction(event -> openSample(sample4));
+        sample5.setOnAction(event -> openSample(sample5));
+        sample6.setOnAction(event -> openSample(sample6));
+    }
+
+    private void createMatrixFilter(MenuItem menuItem, int[][] matrix, int divider){
+        menuItem.setText(Arrays.deepToString(matrix));
+        menuItem.setOnAction(event -> {
+            if(newWindow.isSelected())
+                openImageInNewWindow(matrixFilter.getText(), Converting.matrixFilter(imageView.getImage(), matrix, divider));
+            else
+                imageView.setImage(Converting.matrixFilter(imageView.getImage(), matrix, divider));
+
         });
     }
+
     private void openImageInNewWindow(String title, Image image) {
         Stage stage = new Stage();
         stage.setMinHeight(200);
         stage.setMinWidth(300);
         stage.setTitle(title);
+        stage.setWidth(image.getWidth() + 10);
+        stage.setHeight(image.getHeight() + 10);
+        stage.setMaxWidth(600*image.getWidth()/image.getHeight());
+        stage.setMaxHeight(600);
 
         AnchorPane root = new AnchorPane();
 
         WrappedImageView iv = new WrappedImageView();
         iv.setFitHeight(400);
         iv.setFitWidth(600);
+
         iv.setImage(image);
         AnchorPane.setRightAnchor(iv, 1.0);
         AnchorPane.setTopAnchor(iv, 1.0);
@@ -246,8 +309,13 @@ public class InitializeListeners implements Initializable {
     }
 
     private void openSample(MenuItem sample){
-        imageView.setImage(new Image(Class.class.getResourceAsStream("/" + sample.getText() + ".jpg")));
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        InputStream is = classloader.getResourceAsStream( sample.getText() + ".jpg");
+        imageView.setImage(new Image(is));
+        originalImage = imageView.getImage();
     }
+
+
 }
 class WrappedImageView extends ImageView
 {
