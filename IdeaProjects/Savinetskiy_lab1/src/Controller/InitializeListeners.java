@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -31,6 +32,8 @@ import java.util.ResourceBundle;
 public class InitializeListeners implements Initializable {
     @FXML
     private ImageView imageView;
+    @FXML
+    private GridPane imageGridPane;
     @FXML
     private MenuItem open;
     @FXML
@@ -338,9 +341,20 @@ public class InitializeListeners implements Initializable {
     }
 }
 class WrappedImageView extends ImageView {
+    Integer maxHeight;
+    Integer maxWidth;
+
     WrappedImageView()
     {
         setPreserveRatio(false);
+        maxHeight = 16384;
+        maxWidth = 16384;
+
+    }
+
+    WrappedImageView(Integer imageWidth, Integer imageHeight){
+        maxHeight = imageHeight;
+        maxWidth = imageWidth;
     }
 
     @Override
@@ -360,7 +374,7 @@ class WrappedImageView extends ImageView {
     @Override
     public double maxWidth(double height)
     {
-        return 16384;
+        return maxWidth;
     }
 
     @Override
@@ -380,7 +394,7 @@ class WrappedImageView extends ImageView {
     @Override
     public double maxHeight(double width)
     {
-        return 16384;
+        return maxHeight;
     }
 
     @Override

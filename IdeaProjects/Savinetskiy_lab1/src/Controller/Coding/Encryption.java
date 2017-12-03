@@ -85,7 +85,7 @@ public class Encryption {
                     coding.setRightInterval(coding.getLeftInterval() + coding.getLengthInterval());
                     coding.calculateLengthInterval();
 
-                    outputStep(charsLexicon, i + 1, j, coding);
+                    outputCoding(charsLexicon, i + 1, j, coding);
             }
         }
     }
@@ -96,9 +96,7 @@ public class Encryption {
 
         System.out.println("DECODING START!");
         System.out.println("CODE = " + code);
-        decodingReply.append("DECODING START!\n\n" + "CODE = ")
-                .append(code)
-                .append("\n");
+        decodingReply.append("DECODING START!\n\n");
 
         while (true){
             for (int i = 0; i < getN(); i++) {
@@ -106,17 +104,17 @@ public class Encryption {
                         && (table[i].interval.getLeftInterval() < code)){
 
                     decoding += table[i].aChar;
+                    decodingReply.append("CODE = ")
+                            .append(code)
+                            .append("\nDECODING: ")
+                            .append(decoding)
+                            .append("\n\n");
 
                     code = (code - table[i].interval.getLeftInterval())
                             / (table[i].interval.getRightInterval() - table[i].interval.getLeftInterval());
 
                     System.out.println("decoding = " + decoding);
                     System.out.println("CODE = " + code);
-                    decodingReply.append("decoding = ")
-                            .append(decoding)
-                            .append("\n\nCODE = ")
-                            .append(code)
-                            .append("\n");
                 }
             }
             if (decoding.charAt(decoding.length() - 1) == '!') {
@@ -125,22 +123,22 @@ public class Encryption {
         }
     }
 
-    public void outputTable(Table[] tables){
+    public void outputTable(Table[] table){
         System.out.println();
         System.out.println("TABLE");
-        tableReply.append("TABLE\n\n");
+        tableReply.append("TABLE\n\nLENGTH INTERVAL: ")
+                .append(table[0].chance)
+                .append("\n\n");
 
         for (int i = 0; i < N; i++) {
-            System.out.print(tables[i].aChar + "   " + tables[i].chance + "    [");
-            System.out.println((tables[i].chance*i) + "; " + (tables[i].chance * (i + 1)) + "]");
-            tableReply.append(tables[i].aChar)
+            System.out.print(table[i].aChar + "   " + table[i].chance + "    [");
+            System.out.println((table[i].chance*i) + "; " + (table[i].chance * (i + 1)) + "]");
+            tableReply.append(table[i].aChar)
                     .append("    [")
-                    .append(tables[i].chance * i)
+                    .append(table[i].chance * i)
                     .append("; ")
-                    .append(tables[i].chance * (i + 1))
-                    .append("]   ")
-                    .append(tables[i].chance)
-                    .append("\n");
+                    .append(table[i].chance * (i + 1))
+                    .append("]\n");
         }
         System.out.println();
         System.out.println();
@@ -148,18 +146,18 @@ public class Encryption {
         tableReply.append("\n");
     }
 
-    public void outputStep(String[] charsLexicon, int i, int j, Interval coding){
+    public void outputCoding(String[] charsLexicon, int i, int j, Interval coding){
         System.out.println("STEP " + i + " CHAR: \""+ charsLexicon[j].charAt(0) + "\"");
         System.out.println("INTERVAL: " + coding.toString() + " LENGTH = " + (coding.getRightInterval() - coding.getLeftInterval()));
         System.out.println();
         codingReply.append("STEP ")
                 .append(i)
-                .append(" CHAR: \"")
+                .append("\nCHAR: \"")
                 .append(charsLexicon[j].charAt(0))
                 .append("\"\n")
                 .append("INTERVAL: ")
                 .append(coding.toString())
-                .append(" LENGTH = ")
+                .append("\nLENGTH = ")
                 .append(coding.getRightInterval() - coding.getLeftInterval())
                 .append("\n\n");
     }

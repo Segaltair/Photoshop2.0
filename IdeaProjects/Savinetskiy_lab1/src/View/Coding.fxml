@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="321.0" prefWidth="999.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Coding.InitializeListeners">
+<AnchorPane prefHeight="421.0" prefWidth="999.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Coding.InitializeListeners">
    <children>
       <GridPane fx:id="gridPane" alignment="CENTER" hgap="11.0" layoutX="14.0" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="321.0" prefWidth="999.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="ALWAYS" maxWidth="616.0" minWidth="0.0" prefWidth="384.0" />
-            <ColumnConstraints hgrow="ALWAYS" maxWidth="628.0" minWidth="10.0" prefWidth="268.0" />
-            <ColumnConstraints hgrow="ALWAYS" maxWidth="363.0" minWidth="1.0" prefWidth="324.0" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="616.0" minWidth="0.0" prefWidth="371.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="628.0" minWidth="10.0" prefWidth="312.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="363.0" minWidth="1.0" prefWidth="294.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="33.0" vgrow="NEVER" />
           <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="32.0" vgrow="NEVER" />
           <RowConstraints maxHeight="206.0" minHeight="10.0" prefHeight="33.0" vgrow="NEVER" />
-            <RowConstraints maxHeight="193.0" minHeight="222.0" prefHeight="255.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="444.0" minHeight="222.0" prefHeight="255.0" vgrow="ALWAYS" />
             <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="37.0" valignment="BOTTOM" vgrow="NEVER" />
         </rowConstraints>
          <children>
