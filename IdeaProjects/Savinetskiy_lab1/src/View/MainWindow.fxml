@@ -22,6 +22,7 @@
                         <MenuItem fx:id="desaturation" mnemonicParsing="false" text="Десатурация" />
                         <MenuItem fx:id="gradationByMinimum" mnemonicParsing="false" text="Градация по минимуму" />
                         <MenuItem fx:id="gradationByMaximum" mnemonicParsing="false" text="Градация по максимуму" />
+                  <MenuItem fx:id="binarization" mnemonicParsing="false" text="Бинаризация" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Ещё!">
@@ -42,12 +43,20 @@
                           <MenuItem fx:id="matrixFilter6" mnemonicParsing="false" />
                       </items>
                   </Menu>
-            <Menu mnemonicParsing="false" text="Закодировать!">
+            <Menu mnemonicParsing="false" text="Закодировать">
               <items>
                 <MenuItem fx:id="coding" mnemonicParsing="false" text="Кодирование" />
               </items>
             </Menu>
-                  <Menu mnemonicParsing="false" text="Картинки!">
+            <Menu mnemonicParsing="false" text="Морфология">
+              <items>
+                  <MenuItem fx:id="dilation" mnemonicParsing="false" text="Дилатация" />
+                  <MenuItem fx:id="erosion" mnemonicParsing="false" text="Эрозия" />
+                  <MenuItem fx:id="locking" mnemonicParsing="false" text="Замыкание" />
+                  <MenuItem fx:id="unlocking" mnemonicParsing="false" text="Размыкание" />
+              </items>
+            </Menu>
+                  <Menu mnemonicParsing="false" text="Картинки">
                       <items>
                           <MenuItem fx:id="sample1" mnemonicParsing="false" text="Bird" />
                           <MenuItem fx:id="sample2" mnemonicParsing="false" text="Comic con" />
@@ -64,7 +73,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-      <GridPane fx:id="imageGridPane" alignment="CENTER" layoutX="14.0" layoutY="148.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="425.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+      <GridPane alignment="CENTER" layoutX="14.0" layoutY="148.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="425.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>

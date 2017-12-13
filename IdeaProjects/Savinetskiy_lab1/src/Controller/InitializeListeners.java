@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Matrixes;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,9 +32,17 @@ import java.util.ResourceBundle;
 
 public class InitializeListeners implements Initializable {
     @FXML
-    private ImageView imageView;
+    private MenuItem binarization;
     @FXML
-    private GridPane imageGridPane;
+    private MenuItem dilation;
+    @FXML
+    private MenuItem erosion;
+    @FXML
+    private MenuItem locking;
+    @FXML
+    private MenuItem unlocking;
+    @FXML
+    private ImageView imageView;
     @FXML
     private MenuItem open;
     @FXML
@@ -87,38 +96,6 @@ public class InitializeListeners implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        int[][] matrix1 = new int[][] {
-                {0, 0,0},
-                {0, 0, 1},
-                {0, 0, 0}
-        };
-        int[][] matrix2 = new int[][] {
-                {1, 1, 1},
-                {1, 1, 1},
-                {1, 1, 1}
-        };
-        int[][] matrix3 = new int[][] {
-                {0, 1, 0},
-                {1, -4, 1},
-                {0, 1, 0}
-        };
-
-        int[][] matrix4 = new int[][] {
-                {1, 0, 0}
-        };
-
-        int[][] matrix5 = new int[][] {
-                {-1, 0, 1},
-                {-2, 0, 2},
-                {-1, 0, 1}
-        };
-
-        int[][] matrix6 = new int[][] {
-                {-1, -2, -1},
-                {0, 0, 0},
-                {1, 2, 1}
-        };
-
         open.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             File file = fileChooser.showOpenDialog(imageView.getScene().getWindow());
@@ -167,7 +144,7 @@ public class InitializeListeners implements Initializable {
             setSize.setHeaderText("Введите размеры матрицы. Например \"3 3\"");
             Optional<String> resultString = setSize.showAndWait();
 
-            int divider = 1;
+            int divider;
             String size;
             if (resultString.isPresent()) {
                 size = resultString.get();
@@ -206,12 +183,12 @@ public class InitializeListeners implements Initializable {
             }
         });
 
-        createMatrixFilter(matrixFilter1, matrix1, 1);
-        createMatrixFilter(matrixFilter2, matrix2, 9);
-        createMatrixFilter(matrixFilter3, matrix3, 1);
-        createMatrixFilter(matrixFilter4, matrix4, 1);
-        createMatrixFilter(matrixFilter5, matrix5, 1);
-        createMatrixFilter(matrixFilter6, matrix6, 1);
+        createMatrixFilter(matrixFilter1, Matrixes.matrix1, 1);
+        createMatrixFilter(matrixFilter2, Matrixes.matrix2, 9);
+        createMatrixFilter(matrixFilter3, Matrixes.matrix3, 1);
+        createMatrixFilter(matrixFilter4, Matrixes.matrix4, 1);
+        createMatrixFilter(matrixFilter5, Matrixes.matrix5, 1);
+        createMatrixFilter(matrixFilter6, Matrixes.matrix6, 1);
 
         histogramEqualization.setOnAction(event -> {
             if(newWindow.isSelected())
@@ -232,6 +209,87 @@ public class InitializeListeners implements Initializable {
         sample4.setOnAction(event -> openSample(sample4));
         sample5.setOnAction(event -> openSample(sample5));
         sample6.setOnAction(event -> openSample(sample6));
+
+        binarization.setOnAction(event -> {
+            TextInputDialog setSize = new TextInputDialog();
+            setSize.setTitle("Порог");
+            setSize.setHeaderText("Введите порог (0-255)");
+            Optional<String> resultString = setSize.showAndWait();
+
+            Integer threshold;
+            if (resultString.isPresent()) {
+                threshold = Integer.valueOf(resultString.get());
+                    if(newWindow.isSelected())
+                        openImageInNewWindow(binarization.getText(), Converting.binarization(imageView.getImage(), threshold));
+                    else
+                        imageView.setImage(Converting.binarization(imageView.getImage(), threshold));
+            }
+        });
+
+
+
+        int[][] matrix = new int[][]{
+                {0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        };
+        int[][] matrix11 = new int[][]{
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0},
+                {0,1,0}
+        };
+        int[][] matrix111 = new int[][]{
+                {0,1,0},
+                {0,1,0},
+                {0,1,0}
+        };
+
+        dilation.setOnAction(event -> {
+            if(newWindow.isSelected())
+                openImageInNewWindow(dilation.getText(), Converting.dilation(imageView.getImage(), matrix111, 1,1));
+            else
+                imageView.setImage(Converting.dilation(imageView.getImage(), matrix11, 2,2));
+//            Stage stage = new Stage();
+//            stage.setMinHeight(200);
+//            stage.setMinWidth(300);
+//            stage.setTitle("Создайте структурирующий элемент");
+//
+//            AnchorPane root = new AnchorPane();
+//            GridPane matrix = new GridPane();
+//            TextField rows = new TextField();
+//            TextField columns = new TextField();
+//
+//            Button getDilationImage = new Button("GO!");
+//            getDilationImage.setPrefSize(150,20);
+//            getDilationImage.setOpacity(0.4);
+//            getDilationImage.setOnAction(new EventHandler<ActionEvent>() {
+//                @Override
+//                public void handle(ActionEvent event) {
+//
+//                }
+//            });
+//
+//            root.getChildren().add(getDilationImage);
+//            root.getChildren().add(matrix);
+//            root.getChildren().add(columns);
+//            root.getChildren().add(rows);
+//
+//            stage.setScene(new Scene(root, 600, 400));
+//
+//            stage.show();
+        });
     }
 
     private void createMatrixFilter(MenuItem menuItem, int[][] matrix, int divider){
@@ -252,8 +310,8 @@ public class InitializeListeners implements Initializable {
         stage.setTitle(title);
         stage.setWidth(image.getWidth() + 10);
         stage.setHeight(image.getHeight() + 10);
-        stage.setMaxWidth(600*image.getWidth()/image.getHeight());
-        stage.setMaxHeight(600);
+        stage.setMaxWidth(800*image.getWidth()/image.getHeight());
+        stage.setMaxHeight(800);
 
         AnchorPane root = new AnchorPane();
 
@@ -339,22 +397,16 @@ public class InitializeListeners implements Initializable {
         imageView.setImage(new Image(is));
         originalImage = imageView.getImage();
     }
-}
-class WrappedImageView extends ImageView {
-    Integer maxHeight;
-    Integer maxWidth;
 
-    WrappedImageView()
-    {
-        setPreserveRatio(false);
-        maxHeight = 16384;
-        maxWidth = 16384;
+    private void setStructuryElement(){
 
     }
 
-    WrappedImageView(Integer imageWidth, Integer imageHeight){
-        maxHeight = imageHeight;
-        maxWidth = imageWidth;
+}
+class WrappedImageView extends ImageView {
+    WrappedImageView()
+    {
+        setPreserveRatio(false);
     }
 
     @Override
@@ -374,7 +426,7 @@ class WrappedImageView extends ImageView {
     @Override
     public double maxWidth(double height)
     {
-        return maxWidth;
+        return 16384;
     }
 
     @Override
@@ -394,7 +446,7 @@ class WrappedImageView extends ImageView {
     @Override
     public double maxHeight(double width)
     {
-        return maxHeight;
+        return 16384;
     }
 
     @Override

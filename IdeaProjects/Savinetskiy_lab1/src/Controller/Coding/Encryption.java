@@ -9,14 +9,14 @@ public class Encryption {
     private Table[] table;
     private StringBuilder tableReply;
     private StringBuilder codingReply;
-    private StringBuilder decodingReply;
+    private StringBuilder logDecoding;
 
     public Encryption(String lexicon, String phrase) {
         this.lexicon = lexicon;
         this.phrase = phrase;
         tableReply = new StringBuilder();
         codingReply = new StringBuilder();
-        decodingReply = new StringBuilder();
+        logDecoding = new StringBuilder();
     }
 
     public StringBuilder getTableReply() {
@@ -51,8 +51,8 @@ public class Encryption {
         return codingReply;
     }
 
-    public StringBuilder getDecodingReply() {
-        return decodingReply;
+    public StringBuilder getLogDecoding() {
+        return logDecoding;
     }
 
     public void coding(){
@@ -90,21 +90,22 @@ public class Encryption {
         }
     }
 
-    public void decoding(Interval interval, Table[] table) {
+    public void decoding(Interval interval, Table[] table, double code) {
         decoding = "";
-        double code = interval.getLeftInterval() + (interval.getRightInterval() - interval.getLeftInterval()) / 2;
+        //code = interval.getLeftInterval() + (interval.getRightInterval() - interval.getLeftInterval()) / 2;
 
         System.out.println("DECODING START!");
         System.out.println("CODE = " + code);
-        decodingReply.append("DECODING START!\n\n");
+        logDecoding.append("DECODING START!\n\n");
 
+        int j = 1;
         while (true){
             for (int i = 0; i < getN(); i++) {
                 if ((table[i].interval.getRightInterval() > code)
                         && (table[i].interval.getLeftInterval() < code)){
 
                     decoding += table[i].aChar;
-                    decodingReply.append("CODE = ")
+                    logDecoding.append("CODE = ")
                             .append(code)
                             .append("\nDECODING: ")
                             .append(decoding)
@@ -115,11 +116,16 @@ public class Encryption {
 
                     System.out.println("decoding = " + decoding);
                     System.out.println("CODE = " + code);
+
+                    break;
                 }
             }
             if (decoding.charAt(decoding.length() - 1) == '!') {
                 break;
             }
+            if (j > 30)
+                break;
+            j++;
         }
     }
 
@@ -234,14 +240,18 @@ class Table{
     }
 }
 
-class Start{
+class TestCoding {
     public static void main(String[] args) {
 //        String lexicon = "aeiou!";
 //        String phrase = "eaii!";
-        String lexicon = "q,w,e,r,t,y,!";
-        String phrase = "qw!";
-        Encryption encryption = new Encryption(lexicon, phrase);
-        encryption.coding();
-        encryption.decoding(encryption.getCoding() ,encryption.getTable());
+//        String lexicon = "q,w,e,r,t,y,!";
+//        String phrase = "qw!";
+//        Encryption encryption = new Encryption(lexicon, phrase);
+//        encryption.coding();
+//        encryption.decoding(encryption.getCoding() ,encryption.getTable());
+        int[][] arr = new int[1][2];
+        System.out.println(arr[0].length);
+
+
     }
 }

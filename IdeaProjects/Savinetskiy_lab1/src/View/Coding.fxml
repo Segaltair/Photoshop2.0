@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="421.0" prefWidth="999.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Coding.InitializeListeners">
    <children>
-      <GridPane fx:id="gridPane" alignment="CENTER" hgap="11.0" layoutX="14.0" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="321.0" prefWidth="999.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane fx:id="gridPane" alignment="TOP_CENTER" hgap="11.0" layoutX="14.0" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="321.0" prefWidth="999.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" maxWidth="616.0" minWidth="0.0" prefWidth="371.0" />
             <ColumnConstraints hgrow="ALWAYS" maxWidth="628.0" minWidth="10.0" prefWidth="312.0" />
@@ -15,7 +16,7 @@
           <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="33.0" vgrow="NEVER" />
           <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="32.0" vgrow="NEVER" />
           <RowConstraints maxHeight="206.0" minHeight="10.0" prefHeight="33.0" vgrow="NEVER" />
-            <RowConstraints maxHeight="444.0" minHeight="222.0" prefHeight="255.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="888.0" minHeight="222.0" prefHeight="255.0" vgrow="ALWAYS" />
             <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="37.0" valignment="BOTTOM" vgrow="NEVER" />
         </rowConstraints>
          <children>
@@ -23,13 +24,16 @@
             <Label prefHeight="22.0" prefWidth="92.0" text="Введите словарь" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label text="Введите фразу" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <TextField fx:id="phraseTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="codingButton" mnemonicParsing="false" text="GO!" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Button fx:id="codingButton" mnemonicParsing="false" text="GO!" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <TextArea fx:id="tableTextArea" editable="false" prefHeight="178.0" prefWidth="247.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <TextArea fx:id="decodingTextArea" editable="false" prefHeight="175.0" prefWidth="104.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <TextArea fx:id="codingTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
             <Label text="Кодирование" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Label text="Таблица" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Label text="Раскодирование" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <TextField fx:id="code" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label prefHeight="22.0" prefWidth="78.0" text="Введите код" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="coding" mnemonicParsing="false" text="Закодировать" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </children>
