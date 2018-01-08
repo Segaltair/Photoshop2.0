@@ -8,11 +8,12 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InitializeListeners">
     <children>
-        <MenuBar fx:id="menuBar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
-                <Menu fx:id="file" mnemonicParsing="false" text="Файл">
+                <Menu mnemonicParsing="false" text="Файл">
                     <items>
-                        <MenuItem id="open" fx:id="open" mnemonicParsing="false" text="Открыть" />
+                        <MenuItem fx:id="open" mnemonicParsing="false" text="Открыть" />
+                        <MenuItem fx:id="save" mnemonicParsing="false" text="Сохранить" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Прокачать в ч/б">
@@ -48,12 +49,9 @@
                 <MenuItem fx:id="coding" mnemonicParsing="false" text="Кодирование" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Морфология">
+            <Menu mnemonicParsing="false" text="Бинаризация">
               <items>
-                  <MenuItem fx:id="dilation" mnemonicParsing="false" text="Дилатация" />
-                  <MenuItem fx:id="erosion" mnemonicParsing="false" text="Эрозия" />
-                  <MenuItem fx:id="locking" mnemonicParsing="false" text="Замыкание" />
-                  <MenuItem fx:id="unlocking" mnemonicParsing="false" text="Размыкание" />
+                  <MenuItem fx:id="binarize" mnemonicParsing="false" text="Бинаризовать" />
               </items>
             </Menu>
                   <Menu mnemonicParsing="false" text="Картинки">
@@ -64,6 +62,7 @@
                           <MenuItem fx:id="sample4" mnemonicParsing="false" text="Einstein" />
                           <MenuItem fx:id="sample5" mnemonicParsing="false" text="Lenna" />
                           <MenuItem fx:id="sample6" mnemonicParsing="false" text="Zebra" />
+                          <MenuItem fx:id="sample7" mnemonicParsing="false" text="Binary" />
                       </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Настройки">

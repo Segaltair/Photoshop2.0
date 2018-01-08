@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Matrixes;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +22,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,17 +37,13 @@ public class InitializeListeners implements Initializable {
     @FXML
     private MenuItem binarization;
     @FXML
-    private MenuItem dilation;
+    private MenuItem binarize;
     @FXML
-    private MenuItem erosion;
-    @FXML
-    private MenuItem locking;
-    @FXML
-    private MenuItem unlocking;
-    @FXML
-    private ImageView imageView;
+    public ImageView imageView;
     @FXML
     private MenuItem open;
+    @FXML
+    private MenuItem save;
     @FXML
     private MenuItem fast;
     @FXML
@@ -88,6 +87,8 @@ public class InitializeListeners implements Initializable {
     @FXML
     private MenuItem sample6;
     @FXML
+    private MenuItem sample7;
+    @FXML
     private MenuItem coding;
     @FXML
     private CheckMenuItem newWindow;
@@ -103,6 +104,16 @@ public class InitializeListeners implements Initializable {
                 originalImage = new Image(file.toURI().toString());
                 imageView.setImage(originalImage);}
             catch (NullPointerException e){ }
+        });
+
+        save.setOnAction(event -> {
+            image = imageView.getImage();
+            File outputFile = new File("D:\\Downloads\\Binary.jpg");
+            BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+            try {
+                ImageIO.write(bImage, "png", outputFile);
+            } catch (IOException e) {
+            }
         });
 
         fast.setOnAction(event -> {
@@ -209,6 +220,7 @@ public class InitializeListeners implements Initializable {
         sample4.setOnAction(event -> openSample(sample4));
         sample5.setOnAction(event -> openSample(sample5));
         sample6.setOnAction(event -> openSample(sample6));
+        sample7.setOnAction(event -> openSample(sample7));
 
         binarization.setOnAction(event -> {
             TextInputDialog setSize = new TextInputDialog();
@@ -225,8 +237,6 @@ public class InitializeListeners implements Initializable {
                         imageView.setImage(Converting.binarization(imageView.getImage(), threshold));
             }
         });
-
-
 
         int[][] matrix = new int[][]{
                 {0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -256,39 +266,8 @@ public class InitializeListeners implements Initializable {
                 {0,1,0}
         };
 
-        dilation.setOnAction(event -> {
-            if(newWindow.isSelected())
-                openImageInNewWindow(dilation.getText(), Converting.dilation(imageView.getImage(), matrix111, 1,1));
-            else
-                imageView.setImage(Converting.dilation(imageView.getImage(), matrix11, 2,2));
-//            Stage stage = new Stage();
-//            stage.setMinHeight(200);
-//            stage.setMinWidth(300);
-//            stage.setTitle("Создайте структурирующий элемент");
-//
-//            AnchorPane root = new AnchorPane();
-//            GridPane matrix = new GridPane();
-//            TextField rows = new TextField();
-//            TextField columns = new TextField();
-//
-//            Button getDilationImage = new Button("GO!");
-//            getDilationImage.setPrefSize(150,20);
-//            getDilationImage.setOpacity(0.4);
-//            getDilationImage.setOnAction(new EventHandler<ActionEvent>() {
-//                @Override
-//                public void handle(ActionEvent event) {
-//
-//                }
-//            });
-//
-//            root.getChildren().add(getDilationImage);
-//            root.getChildren().add(matrix);
-//            root.getChildren().add(columns);
-//            root.getChildren().add(rows);
-//
-//            stage.setScene(new Scene(root, 600, 400));
-//
-//            stage.show();
+        binarize.setOnAction(event -> {
+            openBinarizing("Бинаризовать");
         });
     }
 
@@ -361,6 +340,26 @@ public class InitializeListeners implements Initializable {
         }
     }
 
+    public static Image image;
+    private void openBinarizing(String title) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("../View/StructuringElement.fxml"));
+            stage.setTitle("Бинаризация");
+            stage.setMinHeight(360);
+            stage.setMinWidth(720);
+
+            image = imageView.getImage();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void openHistogram(String title, Image image) {
         Stage stage = new Stage();
         stage.setMinHeight(400);
@@ -398,67 +397,4 @@ public class InitializeListeners implements Initializable {
         originalImage = imageView.getImage();
     }
 
-    private void setStructuryElement(){
-
-    }
-
-}
-class WrappedImageView extends ImageView {
-    WrappedImageView()
-    {
-        setPreserveRatio(false);
-    }
-
-    @Override
-    public double minWidth(double height)
-    {
-        return 40;
-    }
-
-    @Override
-    public double prefWidth(double height)
-    {
-        Image I=getImage();
-        if (I==null) return minWidth(height);
-        return I.getWidth();
-    }
-
-    @Override
-    public double maxWidth(double height)
-    {
-        return 16384;
-    }
-
-    @Override
-    public double minHeight(double width)
-    {
-        return 40;
-    }
-
-    @Override
-    public double prefHeight(double width)
-    {
-        Image I=getImage();
-        if (I==null) return minHeight(width);
-        return I.getHeight();
-    }
-
-    @Override
-    public double maxHeight(double width)
-    {
-        return 16384;
-    }
-
-    @Override
-    public boolean isResizable()
-    {
-        return true;
-    }
-
-    @Override
-    public void resize(double width, double height)
-    {
-        setFitWidth(width);
-        setFitHeight(height);
-    }
 }
